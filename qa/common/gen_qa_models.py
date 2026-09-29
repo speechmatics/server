@@ -2856,8 +2856,9 @@ if __name__ == "__main__":
 
         # Make multiple versions of some models for version testing
         # (they use different version policies when created above)
-        # BF16 generation: TensorRT requires SM>=8.0; ONNX has no such
-        # requirement (model generation runs on CPU; ORT decides at runtime).
+        # BF16 generation: TensorRT requires SM>=8.0; ONNX and LibTorch have
+        # no such requirement (model generation runs on CPU; ORT/LibTorch
+        # decide at runtime).
         bf16_for_trt = FLAGS.tensorrt and tu.check_gpus_compute_capability(
             min_capability=8.0
         )
@@ -2865,7 +2866,7 @@ if __name__ == "__main__":
             print(
                 "Skipping the generation of TensorRT PLAN models for the BF16 datatype!"
             )
-        if bf16_for_trt or FLAGS.onnx:
+        if bf16_for_trt or FLAGS.onnx or FLAGS.libtorch:
             create_fixed_models(
                 FLAGS.models_dir,
                 np_dtype_bfloat16,
@@ -3152,8 +3153,9 @@ if __name__ == "__main__":
             32,
         )
 
-        # BF16 generation: TensorRT requires SM>=8.0; ONNX has no such
-        # requirement (model generation runs on CPU; ORT decides at runtime).
+        # BF16 generation: TensorRT requires SM>=8.0; ONNX and LibTorch have
+        # no such requirement (model generation runs on CPU; ORT/LibTorch
+        # decide at runtime).
         bf16_for_trt = FLAGS.tensorrt and tu.check_gpus_compute_capability(
             min_capability=8.0
         )
@@ -3161,7 +3163,7 @@ if __name__ == "__main__":
             print(
                 "Skipping the generation of TensorRT PLAN models for the BF16 datatype!"
             )
-        if bf16_for_trt or FLAGS.onnx:
+        if bf16_for_trt or FLAGS.onnx or FLAGS.libtorch:
             create_models(
                 FLAGS.models_dir,
                 np_dtype_bfloat16,
