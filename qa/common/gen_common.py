@@ -141,6 +141,8 @@ def np_to_torch_dtype(np_dtype):
         return torch.float
     elif np_dtype == np.float64:
         return torch.double
+    elif np_dtype == np_dtype_bfloat16:
+        return torch.bfloat16
     elif np_dtype == np_dtype_string:
         return List[str]
     return None
