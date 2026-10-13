@@ -280,6 +280,7 @@ nvidia-smi --query-gpu=compute_cap,compute_mode,driver_version,name,index --form
 nvidia-smi || true
 echo -e "${COLOR_INFO}Generating PyTorch models${COLOR_RESET}"
 pip3 install onnxscript
+pip3 install "ml_dtypes<=0.5.4"
 set -e
 PATH=$PATH:/usr/local/cuda-13.0/bin
 python3 $TRITON_MDLS_SRC_DIR/gen_qa_models.py --libtorch --models_dir=$TRITON_MDLS_QA_MODEL
